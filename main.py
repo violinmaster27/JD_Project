@@ -1,19 +1,10 @@
-# the main menu that user will see, they will choose which room to enter
-USER_CHOICE = """
-You have now entered the house. You must choose which room to enter.
-    - '1' to enter the dining room
-    - '2' to enter the living room
-    - '3' to enter the kitchen
-    - '4' to enter the bathroom
-    - '5' to enter the bedroom
-    - 'q' to quit
-
-Enter your choice here: """
-
 # empty list of room completed, this will fill up
 # each time a room has been completed
 rooms_completed = []
 
+def end_game():
+    print("GAME OVER")
+    quit()
 
 # each room will have its own function with challenges 'inside' each room
 
@@ -96,6 +87,17 @@ def bedroom():
             print("You cannot enter that room right now.")
             bedroom()
 
+# the main menu that user will see, they will choose which room to enter
+USER_CHOICE = """
+You have now entered the house. You must choose which room to enter.
+    - '1' to enter the dining room
+    - '2' to enter the living room
+    - '3' to enter the kitchen
+    - '4' to enter the bathroom
+    - '5' to enter the bedroom
+    - 'q' to quit
+
+Enter your choice here: """
 
 def main():
     # dictionary of room options that will call the room function
@@ -112,7 +114,7 @@ def main():
     # if user does not choose to quit
     while user_input != 'q':
         # check if it's a valid room
-        if user_input in ('1', '2', '3', '4', '5'):
+        if user_input in room_choices.keys():
             # call that room's function
             room_fuction = room_choices[user_input]
             room_fuction()
@@ -121,8 +123,7 @@ def main():
             # prompt user for choice again
             user_input = input(USER_CHOICE)
 
-    print("Quitting game.")
-    quit()
+    end_game()
 
 
 main()
