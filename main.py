@@ -2,6 +2,44 @@
 # Set initial room
 current_room = "front_door"
 rooms_completed = []
+all_rooms = [
+    {
+        'name': 'front_door',
+        'room_description': 'The front door is a massive plank of dark oak, with a large golden handle.',
+        'room_actions': ['Try the front door.', 'Look up the stairs.', 'Hide inside the coat closet'],
+        'action_results': ['The door is locked shut. It will not budge.', 'Darkness...you hear faint footsteps on one of the upper floors.', 'You are hidden. You also find a spare tuxedo hanging in the closet, obviously the person who lived here liked to play football.']
+    },
+    {
+        'name': 'dining_room',
+        'room_description': 'A long table sits at the center of the dining room, perfectly set with pristine china. A large chandelier floats above it, candlelight illuminating the small room with a warm glow.',
+        'room_actions': ['Sit at the table.', 'Hide under the table.', 'Inspect the chandelier.'],
+        'action_results': ['The seat is warm.', 'The table cloth conseales you... You find a message carved on the underside of the table.', 'It is rusty.']
+    },
+    {
+        'name': 'living_room',
+        'room_description': 'Living room description',
+        'room_actions': ['Action 1', 'Action 2', 'Action 3'],
+        'action_results': ['Action 1 result', 'Action 2 result', 'Action 3 result']
+    },
+    {
+        'name': 'kitchen',
+        'room_description': 'Kitchen description',
+        'room_actions': ['Action 1', 'Action 2', 'Action 3'],
+        'action_results': ['Action 1 result', 'Action 2 result', 'Action 3 result']
+    },
+    {
+        'name': 'bathroom',
+        'room_description': 'Bathroom description',
+        'room_actions': ['Action 1', 'Action 2', 'Action 3'],
+        'action_results': ['Action 1 result', 'Action 2 result', 'Action 3 result']
+    },
+    {
+        'name': 'bedroom',
+        'room_description': 'Bedroom description',
+        'room_actions': ['Action 1', 'Action 2', 'Action 3'],
+        'action_results': ['Action 1 result', 'Action 2 result', 'Action 3 result']
+    }
+]
 
 # Any time actions
 def prompt_action():
@@ -9,17 +47,32 @@ def prompt_action():
     Change rooms, look around, or give up. What do you do?
         - '1' to change rooms
         - '2' to look around
-        - 'q' to give up
+        - 'q' to give up (quit the game)
 
     Enter your choice here: """
     return USER_CHOICE
 
-# need to break after calling change_room() or look_around() anywhere or stuff will break, no pun intended
+# need to break after calling change_room() or look_around() inside and loops or stuff will break, no pun intended
 def change_room(room):
     eval(room + '()')
 
-def look_around(room):
-    print(f"You look around the {room}...")
+def look_around(room_index):
+    room = all_rooms[room_index]
+
+    print(room.get('room_description'))
+    
+    action_options = ""
+    for index, action in enumerate(room.get('room_actions')):
+        action_options = action_options + f'- {index + 1} to...' + action + '\n'
+    # extra line to add this last line is kind of redundant
+    action_options = action_options + 'Enter your choice here: '
+
+    USER_CHOICE = input(action_options)
+    print(room.get('action_results')[int(USER_CHOICE) - 1])
+
+    # call room function again to continue, obviously this shouldnt happen if the player is hidden but we'll deal with that soon
+    change_room(current_room)
+
     
 def end_game():
     print("GAME OVER")
@@ -53,7 +106,7 @@ def front_door():
                 print("Not a valid option. Choose again.")
                 continue
         elif user_input == '2':
-            look_around('front door area')
+            look_around(0)
             break
         elif user_input == 'q':
             end_game()
@@ -87,7 +140,7 @@ def dining_room():
                 print("Not a valid option. Choose again.")
                 continue
         elif user_input == '2':
-            look_around('dining room')
+            look_around(1)
             break
         elif user_input == 'q':
             end_game()
@@ -122,7 +175,7 @@ def living_room():
                 print("Not a valid option. Choose again.")
                 continue
         elif user_input == '2':
-            look_around('living room')
+            look_around(2)
             break
         elif user_input == 'q':
             end_game()
@@ -160,7 +213,7 @@ def kitchen():
                 print("Not a valid option. Choose again.")
                 continue
         elif user_input == '2':
-            look_around('kitchen')
+            look_around(3)
             break
         elif user_input == 'q':
             end_game()
@@ -195,7 +248,7 @@ def bathroom():
                 print("Not a valid option. Choose again.")
                 continue
         elif user_input == '2':
-            look_around('bathroom')
+            look_around(4)
             break
         elif user_input == 'q':
             end_game()
@@ -233,7 +286,7 @@ def bedroom():
                 print("Not a valid option. Choose again.")
                 continue
         elif user_input == '2':
-            look_around('bedroom')
+            look_around(5)
             break
         elif user_input == 'q':
             end_game()
