@@ -17,27 +17,27 @@ all_rooms = [
     },
     {
         'name': 'living_room',
-        'room_description': 'Living room description',
-        'room_actions': ['Action 1', 'Action 2', 'Action 3'],
-        'action_results': ['Action 1 result', 'Action 2 result', 'Action 3 result']
+        'room_description': 'Surprisingly, the living room seems well kept. Eveything is in its right place. A large painting is hung on the wall. A painting of some man, looks familiar from somewhere...',
+        'room_actions': ['Lift the painting', 'Sit on the lounge sofa', 'Inspect the painting'],
+        'action_results': ['You lift the painting to find some sort of safe behind it. If only you had the combination...', 'Creeek! Sitting on the sofa causes a loud noise.', 'You see initials on the bottom left of the painting: A.A. Probably the persons initials?']
     },
     {
         'name': 'kitchen',
-        'room_description': 'Kitchen description',
-        'room_actions': ['Action 1', 'Action 2', 'Action 3'],
-        'action_results': ['Action 1 result', 'Action 2 result', 'Action 3 result']
+        'room_description': "You try to turn on the light but it doesn't work, maybe that's for the better. Still, the kitchen has a strange odor to it, and some dishes in the sink.",
+        'room_actions': ['Check inside the fridge.', 'Look inside the cabinet.', 'Open the drawer next to the sink.'],
+        'action_results': ['A putrid stench emits from the fridge, and you notice a cloudy jar on the top shelf.', 'Nothing special in here.', 'You find a sheathed knife lying in the drawer. It has some Asain writing on it.']
     },
     {
         'name': 'bathroom',
-        'room_description': 'Bathroom description',
-        'room_actions': ['Action 1', 'Action 2', 'Action 3'],
-        'action_results': ['Action 1 result', 'Action 2 result', 'Action 3 result']
+        'room_description': 'The bathroom is small. Not a pleasant smell at all, and the light flickers for a while before fully turning on.',
+        'room_actions': ['Flush the toilet.', 'Open the medicine cabinet.', 'Pull back the shower curtain.'],
+        'action_results': ['It seems broken...I guess the smell is staying.', 'A lot of painkillers...and fungicide, fungus???', 'It is as you feared, a small pool of blood remains in the tub.']
     },
     {
         'name': 'bedroom',
-        'room_description': 'Bedroom description',
-        'room_actions': ['Action 1', 'Action 2', 'Action 3'],
-        'action_results': ['Action 1 result', 'Action 2 result', 'Action 3 result']
+        'room_description': 'A very simple looking bedroom. Signs of use appear throughout the room. But where is the resident?',
+        'room_actions': ['Look in the Closet', 'Search the Nightstand', 'Look in the mirror'],
+        'action_results': ["It's not a closet at all, but a secret passageway leading up somehwere...", 'Fitting, you find a copy of The Shining.', 'You see a figure pass by the door behind you...is it too late to leave?']
     }
 ]
 
@@ -60,7 +60,7 @@ def look_around(room_index):
     room = all_rooms[room_index]
 
     print(room.get('room_description'))
-    
+
     action_options = ""
     for index, action in enumerate(room.get('room_actions')):
         action_options = action_options + f'- {index + 1} to...' + action + '\n'
@@ -73,7 +73,7 @@ def look_around(room_index):
     # call room function again to continue, obviously this shouldnt happen if the player is hidden but we'll deal with that soon
     change_room(current_room)
 
-    
+
 def end_game():
     print("GAME OVER")
     quit()
@@ -92,7 +92,7 @@ def front_door():
         if user_input == '1':
             room_input = input("""
                 Will you enter the living room or the dining room? (L/D):
-                I changed my mind. (nvm) 
+                I changed my mind. (nvm)
                 """)
             if room_input == 'L':
                 change_room('living_room')
@@ -126,7 +126,7 @@ def dining_room():
         if user_input == '1':
             room_input = input("""
                 Will you enter the kitchen or the bedroom? (K/BR):
-                I changed my mind. (nvm) 
+                I changed my mind. (nvm)
                 """)
             if room_input == 'K':
                 change_room('kitchen')
@@ -147,7 +147,7 @@ def dining_room():
         else:
             print("Not a valid input. Please choose a valid action.")
             user_input = input(prompt_action())
-    
+
 
 def living_room():
     global current_room
@@ -161,7 +161,7 @@ def living_room():
         if user_input == '1':
             room_input = input("""
                 Will you enter the kitchen or the bathroom? (K/BTH):
-                I changed my mind. (nvm) 
+                I changed my mind. (nvm)
                 """)
             if room_input == 'K':
                 change_room('kitchen')
@@ -187,7 +187,7 @@ def living_room():
 def kitchen():
     global current_room
     current_room = "kitchen"
-    
+
     print("You are in the kitchen.")
 
     user_input = input(prompt_action())
@@ -196,7 +196,7 @@ def kitchen():
         if user_input == '1':
             room_input = input("""
                 Will you enter the dining room, living room, or bedroom? (D/L/BR):
-                I changed my mind. (nvm) 
+                I changed my mind. (nvm)
                 """)
             if room_input == 'D':
                 change_room('dining_room')
@@ -220,12 +220,12 @@ def kitchen():
         else:
             print("Not a valid input. Please choose a valid action.")
             user_input = input(prompt_action())
-        
+
 
 def bathroom():
     global current_room
     current_room = "bathroom"
-    
+
     print("You are in the bathroom.")
 
     user_input = input(prompt_action())
@@ -234,7 +234,7 @@ def bathroom():
         if user_input == '1':
             room_input = input("""
                 Will you enter the living room or the bedroom? (L/BR):
-                I changed my mind. (nvm) 
+                I changed my mind. (nvm)
                 """)
             if room_input == 'L':
                 change_room('living_room')
@@ -255,12 +255,12 @@ def bathroom():
         else:
             print("Not a valid input. Please choose a valid action.")
             user_input = input(prompt_action())
-        
+
 
 def bedroom():
     global current_room
     current_room = "bedroom"
-    
+
     print("You are in the bedroom.")
 
     user_input = input(prompt_action())
@@ -269,7 +269,7 @@ def bedroom():
         if user_input == '1':
             room_input = input("""
                 Will you enter the dining room, kitchen, or bathroom? (D/K/BTH):
-                I changed my mind. (nvm) 
+                I changed my mind. (nvm)
                 """)
             if room_input == 'D':
                 change_room('dining_room')
