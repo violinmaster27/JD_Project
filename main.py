@@ -55,7 +55,7 @@ def front_door():
         if user_input == '1':
             room_input = input("""
                 Will you enter the living room or the dining room? (L/D):
-                I changed my mind. (nvm)
+                I changed my mind. (NVM)
                 """)
             if room_input == 'L':
                 change_room('living_room')
@@ -63,7 +63,7 @@ def front_door():
             elif room_input == 'D':
                 change_room('dining_room')
                 break
-            elif room_input == 'nvm':
+            elif room_input == 'NVM':
                 front_door()
             else:
                 print("Not a valid option. Choose again.")
@@ -89,7 +89,7 @@ def dining_room():
         if user_input == '1':
             room_input = input("""
                 Will you enter the kitchen or the bedroom? (K/BR):
-                I changed my mind. (nvm)
+                I changed my mind. (NVM)
                 """)
             if room_input == 'K':
                 change_room('kitchen')
@@ -97,7 +97,7 @@ def dining_room():
             elif room_input == 'BR':
                 change_room('bedroom')
                 break
-            elif room_input == 'nvm':
+            elif room_input == 'NVM':
                 dining_room()
             else:
                 print("Not a valid option. Choose again.")
@@ -124,7 +124,7 @@ def living_room():
         if user_input == '1':
             room_input = input("""
                 Will you enter the kitchen or the bathroom? (K/BTH):
-                I changed my mind. (nvm)
+                I changed my mind. (NVM)
                 """)
             if room_input == 'K':
                 change_room('kitchen')
@@ -132,7 +132,7 @@ def living_room():
             elif room_input == 'BTH':
                 change_room('bathroom')
                 break
-            elif room_input == 'nvm':
+            elif room_input == 'NVM':
                 living_room()
             else:
                 print("Not a valid option. Choose again.")
@@ -159,7 +159,7 @@ def kitchen():
         if user_input == '1':
             room_input = input("""
                 Will you enter the dining room, living room, or bedroom? (D/L/BR):
-                I changed my mind. (nvm)
+                I changed my mind. (NVM)
                 """)
             if room_input == 'D':
                 change_room('dining_room')
@@ -170,7 +170,7 @@ def kitchen():
             elif room_input == 'BR':
                 change_room('bedroom')
                 break
-            elif room_input == 'nvm':
+            elif room_input == 'NVM':
                 kitchen()
             else:
                 print("Not a valid option. Choose again.")
@@ -197,7 +197,7 @@ def bathroom():
         if user_input == '1':
             room_input = input("""
                 Will you enter the living room or the bedroom? (L/BR):
-                I changed my mind. (nvm)
+                I changed my mind. (NVM)
                 """)
             if room_input == 'L':
                 change_room('living_room')
@@ -205,7 +205,7 @@ def bathroom():
             elif room_input == 'BR':
                 change_room('bedroom')
                 break
-            elif room_input == 'nvm':
+            elif room_input == 'NVM':
                 bathroom()
             else:
                 print("Not a valid option. Choose again.")
@@ -232,7 +232,7 @@ def bedroom():
         if user_input == '1':
             room_input = input("""
                 Will you enter the dining room, kitchen, or bathroom? (D/K/BTH):
-                I changed my mind. (nvm)
+                I changed my mind. (NVM)
                 """)
             if room_input == 'D':
                 change_room('dining_room')
@@ -243,7 +243,7 @@ def bedroom():
             elif room_input == 'BTH':
                 change_room('bathroom')
                 break
-            elif room_input == 'nvm':
+            elif room_input == 'NVM':
                 bedroom()
             else:
                 print("Not a valid option. Choose again.")
