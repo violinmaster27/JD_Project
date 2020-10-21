@@ -1,4 +1,7 @@
 # ************ GAME STATE ************
+# using the time.sleep() function will add some suspense to this game
+# what do you think? i've incorporated it a bit so you can see what it's like
+import time
 from Rooms import all_rooms
 # Set initial room
 current_room = 'front_door'
@@ -17,10 +20,13 @@ def prompt_action():
 
 # need to break after calling change_room() or look_around() inside and loops or stuff will break, no pun intended
 def change_room(room_name):
+    time.sleep(1)
     eval(room_name + '()')
 
 def look_around(room_index):
     room = all_rooms[room_index]
+
+    time.sleep(1)
 
     print(room.description)
 
@@ -31,6 +37,7 @@ def look_around(room_index):
     action_options = action_options + 'Enter your choice here: '
 
     USER_CHOICE = input(action_options)
+    time.sleep(1)
     print(room.action_results[int(USER_CHOICE) - 1])
 
     # call room function again to continue, obviously this shouldnt happen if the player is hidden but we'll deal with that soon
@@ -48,6 +55,7 @@ def front_door():
     current_room = "front_door"
 
     print("You are at the front door. The stairway is blocked by debris.")
+    time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -82,6 +90,7 @@ def dining_room():
     current_room = "dining_room"
 
     print("You are in the dining room.")
+    time.sleep(1)
 
     user_input = input(prompt_action())
 
@@ -117,6 +126,7 @@ def living_room():
     current_room = "living_room"
 
     print("You are in the living room.")
+    time.sleep(1)
 
     user_input = input(prompt_action())
 
@@ -152,6 +162,7 @@ def kitchen():
     current_room = "kitchen"
 
     print("You are in the kitchen.")
+    time.sleep(1)
 
     user_input = input(prompt_action())
 
@@ -190,6 +201,7 @@ def bathroom():
     current_room = "bathroom"
 
     print("You are in the bathroom.")
+    time.sleep(1)
 
     user_input = input(prompt_action())
 
@@ -225,6 +237,7 @@ def bedroom():
     current_room = "bedroom"
 
     print("You are in the bedroom.")
+    time.sleep(1)
 
     user_input = input(prompt_action())
 
@@ -261,6 +274,7 @@ def bedroom():
 # ************ GAME START ************
 def start_game():
     print("You have now entered the house. The front door locks behind you! The house is quiet but ominous.")
+    time.sleep(2)
     change_room(current_room)
 
 start_game()
