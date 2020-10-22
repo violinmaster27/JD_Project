@@ -29,17 +29,17 @@ class LivingRoom:
 
         if safe_code == 511433:
             print("You have opened the safe!! Inside you find a set of keys. These could be useful.")
-
-            keys_attained = True
+            return True
         else:
             print("That is not the correct safe code.\n")
             user_choice = input("Do you wish to try again? (y/n)").upper()
-            keys_attained = False
 
             if user_choice == "Y":
-                open_safe()
+                self.open_safe()
             elif user_choice == "N":
                 print("Sounds good.")
+
+        return False
 
 
 class Kitchen:
@@ -76,7 +76,7 @@ class Bedroom:
     actions = ['Look in the Closet', 'Search the Nightstand', 'Look in the mirror']
     action_results = ["It's not a closet at all, but a secret passageway leading up somehwere...", 'Fitting, you find a copy of The Shining.', 'You see a figure pass by the door behind you...is it too late to leave?']
 
-    def go_up_passage():
+    def go_up_passage(self, keys_attained):
         print("You go up the secret passageway. At the end is a door...but it's locked. You need a key to enter.")
         user_choice = input("Do you try to open the door? (y/n)").lower()
 

@@ -6,6 +6,7 @@ from Rooms import all_rooms
 # Set initial room
 current_room = 'front_door'
 rooms_completed = []
+keys_attained = False
 
 # Any time actions
 def prompt_action():
