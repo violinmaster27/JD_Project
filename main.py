@@ -1,13 +1,12 @@
-# ************ GAME STATE ************
-# using the time.sleep() function will add some suspense to this game
-# what do you think? i've incorporated it a bit so you can see what it's like
 import time
 from Rooms import all_rooms
-# Set initial room
+
+# ************ GAME STATE ************
 current_room = 'front_door'
 rooms_completed = []
-keys_attained = False
-is_hidden = True
+is_hidden = False
+has_keys = False
+has_knife = False
 
 # Any time actions
 def prompt_action():
@@ -35,17 +34,63 @@ def look_around(room_index):
     action_options = ""
     for index, action in enumerate(room.actions):
         action_options = action_options + f'- {index + 1} to...' + action + '\n'
-    # extra line to add this last line is kind of redundant
+    # Make sure the user's input is valid
     action_options = action_options + 'Enter your choice here: '
 
-    USER_CHOICE = input(action_options)
+    USER_CHOICE = int(input(action_options))
     time.sleep(1)
-    print(room.action_results[int(USER_CHOICE) - 1])
+    print(room.action_results[USER_CHOICE - 1])
 
-    # Here something happens, either nothing and it calls change_room, or the player stays hidden, OR special room method is called
+    # time.sleep(1)
+
+    # Here something happens, either nothing and it calls change_room again, or the player stays hidden, OR a specific special room method is called
     # If player picks certain action, activate its associated method and prompt the user again
+    global has_keys
+    global has_knife
 
+    if room.name == 'front_door':
+        room.specialInteraction()
+
+    if room.name == 'dining_room':
+        room.specialInteraction()
+
+    if room.name == 'living_room':
+        # player inspects safe
+        if USER_CHOICE == 1:
+            if has_keys == False:
+                result = room.open_safe()
+                if result:
+                    has_keys = True
+            else:
+                print("I already opened this safe. Guess I'll take these pure diamonds too hehe yeaa boiiiiii.")
+
+    if room.name == 'kitchen':
+        # player inspects jar
+        if USER_CHOICE == 1:
+            room.inspect_jar()
+        # player inspects knife
+        if USER_CHOICE == 3:
+            if has_knife == False:
+                result = room.take_knife()
+                if result:
+                    has_knife = True
+            else:
+                print("Just an empty drawer.")
+
+    if room.name == 'bathroom':
+        room.specialInteraction()
+
+    if room.name == 'bedroom':
+        # player interacts with secret passageway
+        if USER_CHOICE == 1:
+            result = room.go_up_passage(has_keys)
+            if result:
+                print("Player goes to second level")
+                # just ending game for now
+                end_game()
+        
     # call room function again to continue, obviously this shouldnt happen if the player is hidden but we'll deal with that soon
+    
     change_room(current_room)
 
 

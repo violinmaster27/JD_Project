@@ -1,5 +1,5 @@
 class FrontDoor:
-    name = 'dining_room'
+    name = 'front_door'
     description = 'The front door is a massive plank of dark oak, with a large golden handle.'
     actions = ['Try the front door.', 'Look up the stairs.', 'Hide inside the coat closet']
     action_results = ['The door is locked shut. It will not budge.', "Darkness...you hear faint footsteps on one of the upper floors. You're not alone.", 'You are hidden. You also find a spare tuxedo hanging in the closet, obviously the person who lived here liked to play football.']
@@ -28,8 +28,13 @@ class LivingRoom:
         user_choice = input("Do you attempt to open the safe? (y/n)").upper()
 
         if user_choice == 'Y':
-            safe_code = int(input("Enter the safe code: "))
-
+            while True:
+                try:
+                    safe_code = int(input("Enter the safe code: "))
+                    break
+                except ValueError:
+                    print('Please enter an integer value.')
+            
             if safe_code == 511433:
                 print("You have opened the safe!! Inside you find a set of keys. These could be useful.")
                 return True
@@ -62,8 +67,10 @@ class Kitchen:
 
         if user_choice == 'Y':
             print("The knife is pretty lightweight. This writing obviously means something, but I wonder what. You keep a hold of the knife just in case.")
+            return True
         elif user_choice == 'N':
             print("Better leave it. Don't wanna hurt myself.")
+            return False
 
 
 class Bathroom:
@@ -82,18 +89,21 @@ class Bedroom:
     actions = ['Look in the Closet', 'Search the Nightstand', 'Look in the mirror']
     action_results = ["It's not a closet at all, but a secret passageway leading up somewhere...", 'Fitting, you find a copy of The Shining.', 'You see a figure pass by the door behind you...is it too late to leave?']
 
-    def go_up_passage(self, keys_attained):
+    def go_up_passage(self, has_keys):
         print("You go up the secret passageway. At the end is a door...but it's locked. You need a key to enter.")
         user_choice = input("Do you try to open the door? (y/n)").upper()
 
         if user_choice == 'Y':
-            if keys_attained:
-                print("You open the door and enter into the unknown.")
+            if has_keys:
+                print("You take a second to find the right key but once you do the door clicks open. You enter into the unknown.")
+                return True
                 # this will lead into the second floor of rooms
             else:
                 print("You need a key to open this door. Find the keys and come back again.")
         elif user_choice == 'N':
             print("Be on your way, but don't waste any time!")
+            
+        return False
 
 
     def open_book(self):
