@@ -7,6 +7,7 @@ from Rooms import all_rooms
 current_room = 'front_door'
 rooms_completed = []
 keys_attained = False
+is_hidden = True
 
 # Any time actions
 def prompt_action():
@@ -40,6 +41,9 @@ def look_around(room_index):
     USER_CHOICE = input(action_options)
     time.sleep(1)
     print(room.action_results[int(USER_CHOICE) - 1])
+
+    # Here something happens, either nothing and it calls change_room, or the player stays hidden, OR special room method is called
+    # If player picks certain action, activate its associated method and prompt the user again
 
     # call room function again to continue, obviously this shouldnt happen if the player is hidden but we'll deal with that soon
     change_room(current_room)

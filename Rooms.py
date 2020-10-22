@@ -25,19 +25,20 @@ class LivingRoom:
     action_results = ['You lift the painting to find some sort of safe behind it. If only you had the combination...', 'Creeek! Sitting on the sofa causes a loud noise.', 'You see initials on the bottom left of the painting: A.A. Probably the persons initials?']
 
     def open_safe(self):
-        safe_code = int(input("Enter the safe code: "))
+        user_choice = input("Do you attempt to open the safe? (y/n)").upper()
 
-        if safe_code == 511433:
-            print("You have opened the safe!! Inside you find a set of keys. These could be useful.")
-            return True
-        else:
-            print("That is not the correct safe code.\n")
-            user_choice = input("Do you wish to try again? (y/n)").upper()
+        if user_choice == 'Y':
+            safe_code = int(input("Enter the safe code: "))
 
-            if user_choice == "Y":
+            if safe_code == 511433:
+                print("You have opened the safe!! Inside you find a set of keys. These could be useful.")
+                return True
+            else:
+                print("That is not the correct safe code. You could try again.\n")
                 self.open_safe()
-            elif user_choice == "N":
-                print("Sounds good.")
+
+        elif user_choice == 'N':
+            print("There's no way I can open it without the combination.")
 
         return False
 
@@ -48,16 +49,21 @@ class Kitchen:
     actions = ['Check inside the fridge.', 'Look inside the cabinet.', 'Open the drawer next to the sink.']
     action_results = ['A putrid stench emits from the fridge, and you notice a cloudy jar on the top shelf.', 'Nothing special in here.', 'You find a sheathed knife lying in the drawer. It has some Asain writing on it.']
 
-    def take_knife(self):
-        print("The knife is pretty lightweight. This writing obviously means something, but I wonder what. You keep a hold of the knife just in case.")
-
     def inspect_jar(self):
-        user_choice = input("Do you wish to open the jar? (y/n)")
+        user_choice = input("Do you wish to open the jar? (y/n)").upper()
 
-        if user_choice == 'y':
+        if user_choice == 'Y':
             print("You open the jar to find some kind of egg inside. Who knows how long this has been here?")
-        elif user_choice == 'n':
+        elif user_choice == 'N':
             print("Perhaps that was a wise choice. Stay safe.")
+
+    def take_knife(self):
+        user_choice = input("Do you take the knife? (y/n)").upper()
+
+        if user_choice == 'Y':
+            print("The knife is pretty lightweight. This writing obviously means something, but I wonder what. You keep a hold of the knife just in case.")
+        elif user_choice == 'N':
+            print("Better leave it. Don't wanna hurt myself.")
 
 
 class Bathroom:
@@ -74,19 +80,19 @@ class Bedroom:
     name = 'bedroom'
     description = 'A very simple looking bedroom. Signs of use appear throughout the room. But where is the resident?'
     actions = ['Look in the Closet', 'Search the Nightstand', 'Look in the mirror']
-    action_results = ["It's not a closet at all, but a secret passageway leading up somehwere...", 'Fitting, you find a copy of The Shining.', 'You see a figure pass by the door behind you...is it too late to leave?']
+    action_results = ["It's not a closet at all, but a secret passageway leading up somewhere...", 'Fitting, you find a copy of The Shining.', 'You see a figure pass by the door behind you...is it too late to leave?']
 
     def go_up_passage(self, keys_attained):
         print("You go up the secret passageway. At the end is a door...but it's locked. You need a key to enter.")
-        user_choice = input("Do you try to open the door? (y/n)").lower()
+        user_choice = input("Do you try to open the door? (y/n)").upper()
 
-        if user_choice == 'y':
+        if user_choice == 'Y':
             if keys_attained:
                 print("You open the door and enter into the unknown.")
                 # this will lead into the second floor of rooms
             else:
                 print("You need a key to open this door. Find the keys and come back again.")
-        elif user_choice == 'n':
+        elif user_choice == 'N':
             print("Be on your way, but don't waste any time!")
 
 
