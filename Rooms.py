@@ -1,3 +1,5 @@
+import time
+
 class FrontDoor:
     name = 'front_door'
     description = 'The front door is a massive plank of dark oak, with a large golden handle.'
@@ -25,7 +27,7 @@ class LivingRoom:
     action_results = ['You lift the painting to find some sort of safe behind it. If only you had the combination...', 'Creeek! Sitting on the sofa causes a loud noise.', 'You see initials on the bottom left of the painting: A.A. Probably the persons initials?']
 
     def open_safe(self):
-        user_choice = input("Do you attempt to open the safe? (y/n)").upper()
+        user_choice = input("Do you attempt to open the safe? (y/n) ").upper()
 
         if user_choice == 'Y':
             while True:
@@ -55,7 +57,7 @@ class Kitchen:
     action_results = ['A putrid stench emits from the fridge, and you notice a cloudy jar on the top shelf.', 'Nothing special in here.', 'You find a sheathed knife lying in the drawer. It has some Asain writing on it.']
 
     def inspect_jar(self):
-        user_choice = input("Do you wish to open the jar? (y/n)").upper()
+        user_choice = input("Do you wish to open the jar? (y/n) ").upper()
 
         if user_choice == 'Y':
             print("You open the jar to find some kind of egg inside. Who knows how long this has been here?")
@@ -63,7 +65,7 @@ class Kitchen:
             print("Perhaps that was a wise choice. Stay safe.")
 
     def take_knife(self):
-        user_choice = input("Do you take the knife? (y/n)").upper()
+        user_choice = input("Do you take the knife? (y/n) ").upper()
 
         if user_choice == 'Y':
             print("The knife is pretty lightweight. This writing obviously means something, but I wonder what. You keep a hold of the knife just in case.")
@@ -91,10 +93,12 @@ class Bedroom:
 
     def go_up_passage(self, has_keys):
         print("You go up the secret passageway. At the end is a door...but it's locked. You need a key to enter.")
-        user_choice = input("Do you try to open the door? (y/n)").upper()
+        user_choice = input("Do you try to open the door? (y/n) ").upper()
 
         if user_choice == 'Y':
             if has_keys:
+                # just had to add it here for dramatic effect
+                time.sleep(2)
                 print("You take a second to find the right key but once you do the door clicks open. You enter into the unknown.")
                 return True
                 # this will lead into the second floor of rooms
@@ -102,7 +106,7 @@ class Bedroom:
                 print("You need a key to open this door. Find the keys and come back again.")
         elif user_choice == 'N':
             print("Be on your way, but don't waste any time!")
-            
+
         return False
 
 

@@ -34,14 +34,20 @@ def look_around(room_index):
     action_options = ""
     for index, action in enumerate(room.actions):
         action_options = action_options + f'- {index + 1} to...' + action + '\n'
-    # Make sure the user's input is valid
+    
     action_options = action_options + 'Enter your choice here: '
 
-    USER_CHOICE = int(input(action_options))
+    # Type check user input
+    while True:
+        try:
+            USER_CHOICE = int(input(action_options))
+            break
+        except ValueError:
+            print('Please enter an integer value.')
     time.sleep(1)
     print(room.action_results[USER_CHOICE - 1])
 
-    # time.sleep(1)
+    time.sleep(1)
 
     # Here something happens, either nothing and it calls change_room again, or the player stays hidden, OR a specific special room method is called
     # If player picks certain action, activate its associated method and prompt the user again
