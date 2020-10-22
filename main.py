@@ -81,7 +81,8 @@ def look_around(room_index):
                 if result:
                     has_knife = True
             else:
-                print("Just an empty drawer.")
+                # this is kinda weird bc the action result describes you finding the knife in the drawer, even if you have it. could redo some logic or redo the wording somehow. small problem tho.
+                print("Oh wait, you're already holding this knife.")
 
     if room.name == 'bathroom':
         room.specialInteraction()
