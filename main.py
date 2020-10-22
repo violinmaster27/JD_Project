@@ -147,7 +147,7 @@ def dining_room():
     while True:
         if user_input == '1':
             room_input = input("""
-                Will you enter the kitchen or the bedroom? (K/BR):
+                Will you enter the kitchen, bedroom, or front door area? (K/BR/F):
                 I changed my mind. (nvm)
                 """).upper()
             if room_input == 'K':
@@ -155,6 +155,9 @@ def dining_room():
                 break
             elif room_input == 'BR':
                 change_room('bedroom')
+                break
+            elif room_input == 'F':
+                change_room('front_door')
                 break
             elif room_input == 'NVM':
                 dining_room()
@@ -183,7 +186,7 @@ def living_room():
     while True:
         if user_input == '1':
             room_input = input("""
-                Will you enter the kitchen or the bathroom? (K/BTH):
+                Will you enter the kitchen, bathroom, or front door area? (K/BTH/F):
                 I changed my mind. (nvm)
                 """).upper()
             if room_input == 'K':
@@ -191,6 +194,9 @@ def living_room():
                 break
             elif room_input == 'BTH':
                 change_room('bathroom')
+                break
+            elif room_input == 'F':
+                change_room('front_door')
                 break
             elif room_input == 'NVM':
                 living_room()
