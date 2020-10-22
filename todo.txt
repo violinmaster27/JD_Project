@@ -1,0 +1,24 @@
+********** PRIMARY TODOS **********
+
+- Get the is_hidden mechanic to work, need to set conditions inside look_around function
+
+- Decide what special interactions to add to other rooms, if any, and add them
+Maybe more noise makers or items to take
+
+- Address the weird issue where when the player picks an action, it gives a static description
+even when the player has already completed that action ex. Player already has the knife but when they open drawer again
+it describes the knife in the drawer. Could add some conditions or just edit descriptions to make sense.
+
+
+
+
+
+
+
+********** SAVING FOR LATER **********
+
+- Randomize safe code!?
+
+- Create a monster/bad guy AI that tracks the player! - Interacts with is_hidden and loud sound/alert mechanics, and time passed
+> Subtask: Keep track of sound/alert level and time passed, they can even be a function of each other i.e. alert level 
+increases gradually as time passes and jumps when loud noise is made
