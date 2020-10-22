@@ -113,8 +113,8 @@ def front_door():
         if user_input == '1':
             room_input = input("""
                 Will you enter the living room or the dining room? (L/D):
-                I changed my mind. (NVM)
-                """)
+                I changed my mind. (nvm)
+                """).upper()
             if room_input == 'L':
                 change_room('living_room')
                 break
@@ -148,8 +148,8 @@ def dining_room():
         if user_input == '1':
             room_input = input("""
                 Will you enter the kitchen or the bedroom? (K/BR):
-                I changed my mind. (NVM)
-                """)
+                I changed my mind. (nvm)
+                """).upper()
             if room_input == 'K':
                 change_room('kitchen')
                 break
@@ -184,8 +184,8 @@ def living_room():
         if user_input == '1':
             room_input = input("""
                 Will you enter the kitchen or the bathroom? (K/BTH):
-                I changed my mind. (NVM)
-                """)
+                I changed my mind. (nvm)
+                """).upper()
             if room_input == 'K':
                 change_room('kitchen')
                 break
@@ -220,8 +220,8 @@ def kitchen():
         if user_input == '1':
             room_input = input("""
                 Will you enter the dining room, living room, or bedroom? (D/L/BR):
-                I changed my mind. (NVM)
-                """)
+                I changed my mind. (nvm)
+                """).upper()
             if room_input == 'D':
                 change_room('dining_room')
                 break
@@ -259,8 +259,8 @@ def bathroom():
         if user_input == '1':
             room_input = input("""
                 Will you enter the living room or the bedroom? (L/BR):
-                I changed my mind. (NVM)
-                """)
+                I changed my mind. (nvm)
+                """).upper()
             if room_input == 'L':
                 change_room('living_room')
                 break
@@ -295,8 +295,8 @@ def bedroom():
         if user_input == '1':
             room_input = input("""
                 Will you enter the dining room, kitchen, or bathroom? (D/K/BTH):
-                I changed my mind. (NVM)
-                """)
+                I changed my mind. (nvm)
+                """).upper()
             if room_input == 'D':
                 change_room('dining_room')
                 break
