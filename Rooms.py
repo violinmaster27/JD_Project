@@ -1,4 +1,18 @@
 import time
+import random
+
+global safe_number
+
+def random_safe_code():
+    global safe_number
+
+    # use the randrange function from random library, make sure it'll always
+    # be a 6 digit number
+    safe_number = random.randrange(100000, 999999)
+
+    return safe_number
+
+random_safe_code()
 
 class FrontDoor:
     name = 'front_door'
@@ -11,16 +25,20 @@ class FrontDoor:
 
 
 class DiningRoom:
+    global safe_number
+
     name = 'dining_room'
     description = 'A long table sits at the center of the dining room, perfectly set with pristine china. A large chandelier floats above it, candlelight illuminating the small room with a warm glow.'
     actions = ['Sit at the table.', 'Hide under the table.', 'Inspect the chandelier.']
-    action_results = ['The seat is warm. Suddenly you feel that someone is watching you.', "The table cloth conseales you... You see a number carved into the underside of the table. '5-1-1-4-3-3'", 'Whoever lives here needs to dust more often.']
+    action_results = ['The seat is warm. Suddenly you feel that someone is watching you.', f"The table cloth conseales you... You see a number carved into the underside of the table. '{safe_number}'", 'Whoever lives here needs to dust more often.']
 
     def specialInteraction(self):
         return 'If there is a special interaction it goes here.'
 
 
 class LivingRoom:
+    global safe_number
+
     name = 'living_room'
     description = 'Surprisingly, the living room seems well kept. Eveything is in its right place. A large painting is hung on the wall. A painting of some man, looks familiar from somewhere...'
     actions = ['Lift the painting', 'Sit on the lounge sofa', 'Inspect the painting']
@@ -32,12 +50,12 @@ class LivingRoom:
         if user_choice == 'Y':
             while True:
                 try:
-                    safe_code = int(input("Enter the safe code: "))
+                    user_code = int(input("Enter the safe code: "))
                     break
                 except ValueError:
                     print('Please enter an integer value.')
-            
-            if safe_code == 511433:
+
+            if user_code == safe_number:
                 print("You have opened the safe!! Inside you find a set of keys. These could be useful.")
                 return True
             else:
