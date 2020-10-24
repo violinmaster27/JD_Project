@@ -31,10 +31,12 @@ def look_around(room_index):
 
     print(room.description)
 
+    time.sleep(1)
+
     action_options = ""
     for index, action in enumerate(room.actions):
         action_options = action_options + f'- {index + 1} to...' + action + '\n'
-    
+
     action_options = action_options + 'Enter your choice here: '
 
     # Type check user input
@@ -95,9 +97,9 @@ def look_around(room_index):
                 print("Player goes to second level")
                 # just ending game for now
                 end_game()
-        
+
     # call room function again to continue, obviously this shouldnt happen if the player is hidden but we'll deal with that soon
-    
+
     change_room(current_room)
 
 
@@ -147,7 +149,7 @@ def dining_room():
     current_room = "dining_room"
 
     print("You are in the dining room.")
-    time.sleep(1)
+    time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -186,7 +188,7 @@ def living_room():
     current_room = "living_room"
 
     print("You are in the living room.")
-    time.sleep(1)
+    time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -225,7 +227,7 @@ def kitchen():
     current_room = "kitchen"
 
     print("You are in the kitchen.")
-    time.sleep(1)
+    time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -264,7 +266,7 @@ def bathroom():
     current_room = "bathroom"
 
     print("You are in the bathroom.")
-    time.sleep(1)
+    time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -300,7 +302,7 @@ def bedroom():
     current_room = "bedroom"
 
     print("You are in the bedroom.")
-    time.sleep(1)
+    time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -336,7 +338,7 @@ def bedroom():
 
 # ************ GAME START ************
 def start_game():
-    print("You have now entered the house. The front door locks behind you! The house is quiet but ominous.")
+    print("You have now entered the house. The front door locks behind you! The house is quiet but ominous. Find a way to get out, but don't take too long or else you might not make it out alive...")
     time.sleep(2)
     change_room(current_room)
 
