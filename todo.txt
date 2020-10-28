@@ -19,8 +19,6 @@ unless they need to retrieve an object, then it can keep showing up until they g
 
 ********** SAVING FOR LATER **********
 
-- Randomize safe code!?
-
 - Create a monster/bad guy AI that tracks the player! - Interacts with is_hidden and loud sound/alert mechanics, and time passed
 > Subtask: Keep track of sound/alert level and time passed, they can even be a function of each other i.e. alert level
 increases gradually as time passes and jumps when loud noise is made
