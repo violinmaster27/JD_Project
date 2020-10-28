@@ -94,9 +94,16 @@ def look_around(room_index):
         if USER_CHOICE == 1:
             result = room.go_up_passage(has_keys)
             if result:
-                print("Player goes to second level")
-                # just ending game for now
-                end_game()
+                time.sleep(2)
+                # player enters into library
+                library()
+
+    if room.name == 'library':
+        if USER_CHOICE == 2:
+            room.hide_in_shadows()
+
+    if room.name == 'study':
+        room.special_interaction()
 
     # call room function again to continue, obviously this shouldnt happen if the player is hidden but we'll deal with that soon
 
@@ -336,10 +343,83 @@ def bedroom():
             user_input = input(prompt_action())
 
 
+def library():
+    global current_room
+    current_room = "library"
+
+    print("You are in the library.")
+    time.sleep(2)
+
+    user_input = input(prompt_action())
+
+    while True:
+        if user_input == '1':
+            room_input = input("""
+                Will you enter the study or go back to the bedroom? (S/BR):
+                I changed my mind. (nvm)
+                """).upper()
+            if room_input == 'S':
+                change_room('study')
+                break
+            elif room_input == 'BR':
+                change_room('bedroom')
+                break
+            elif room_input == 'NVM':
+                bedroom()
+            else:
+                print("Not a valid option. Choose again.")
+                continue
+        elif user_input == '2':
+            look_around(5)
+            break
+        elif user_input == 'q':
+            end_game()
+        else:
+            print("Not a valid input. Please choose a valid action.")
+            user_input = input(prompt_action())
+
+
+def study():
+    global current_room
+    current_room = "study"
+
+    print("You are in the study.")
+    time.sleep(2)
+
+    user_input = input(prompt_action())
+
+    while True:
+        if user_input == '1':
+            room_input = input("""
+                Will you enter the library, or try to escape through the front door? (L/F):
+                I changed my mind. (nvm)
+                """).upper()
+            if room_input == 'L':
+                change_room('library')
+                break
+            elif room_input == 'F':
+                change_room('front_door')
+                break
+            elif room_input == 'NVM':
+                bedroom()
+            else:
+                print("Not a valid option. Choose again.")
+                continue
+        elif user_input == '2':
+            look_around(5)
+            break
+        elif user_input == 'q':
+            end_game()
+        else:
+            print("Not a valid input. Please choose a valid action.")
+            user_input = input(prompt_action())
+
+
 # ************ GAME START ************
 def start_game():
-    print("You have now entered the house. The front door locks behind you! The house is quiet but ominous. Find a way to get out, but don't take too long or else you might not make it out alive...")
-    time.sleep(2)
+    input("You have now entered the house. The front door locks behind you!"
+          " The house is quiet but ominous. Find a way to get out, but don't "
+          "take too long or else you might not make it out alive...")
     change_room(current_room)
 
 start_game()
