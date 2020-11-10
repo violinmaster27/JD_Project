@@ -20,6 +20,7 @@ class FrontDoor:
     actions = ['Try the front door.', 'Look up the stairs.', 'Hide inside the coat closet']
     action_results = ['The door is locked shut.', "Darkness...you hear faint footsteps on one of the upper floors. You're not alone.", 'You are hidden. You also find a spare tuxedo hanging in the closet, obviously the person who lived here liked to play football.']
 
+    # only way to win the game so far, could be other ways if we want
     def escape_the_house(self, has_escape_keys):
         answer = input("Do you try to escape through the front door? (y/n)").upper()
 
