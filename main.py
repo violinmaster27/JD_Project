@@ -57,6 +57,7 @@ def look_around(room_index):
     # If player picks certain action, activate its associated method and prompt the user again
     global has_keys
     global has_knife
+    global has_escape_keys
 
     if room.name == 'front_door':
         if USER_CHOICE == 1:
@@ -100,6 +101,8 @@ def look_around(room_index):
                 time.sleep(2)
                 # player enters into library
                 library()
+        if USER_CHOICE == 2:
+            room.open_book()
 
     if room.name == 'library':
         if USER_CHOICE == 2:
@@ -109,7 +112,10 @@ def look_around(room_index):
         if USER_CHOICE == 1:
             room.read_letter()
         if USER_CHOICE == 2:
-            room.take_keys(has_escape_keys)
+            if has_escape_keys == False:
+                result = room.take_keys()
+                if result:
+                    has_escape_keys = True
 
     # call room function again to continue, obviously this shouldnt happen if the player is hidden but we'll deal with that soon
 

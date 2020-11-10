@@ -22,10 +22,12 @@ class FrontDoor:
 
     def escape_the_house(self, has_escape_keys):
         answer = input("Do you try to escape through the front door? (y/n)").upper()
+        print(has_escape_keys)
 
         if answer == "Y":
             if has_escape_keys:
                 print("You open the front door and escape this creepy house. YOU WIN!!")
+                quit()
             else:
                 print("You need the correct key to open this door. Go search the house, you may get lucky.")
         elif answer == "N":
@@ -207,13 +209,14 @@ class Study:
             print("Not a valid answer, try again.")
             self.read_letter()
 
-    def take_keys(self, has_escape_keys):
+    def take_keys(self):
         answer = input("Do you take the keys? (y/n)").upper()
 
         if answer == "Y":
-            has_escape_keys = True
+            return True 
         elif answer == "N":
             print("You sure like to take risks, don't you??")
+            return False 
         else:
             print("Not a valid answer. Try again.")
             self.take_keys()
