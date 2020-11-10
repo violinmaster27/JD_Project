@@ -22,7 +22,6 @@ class FrontDoor:
 
     def escape_the_house(self, has_escape_keys):
         answer = input("Do you try to escape through the front door? (y/n)").upper()
-        print(has_escape_keys)
 
         if answer == "Y":
             if has_escape_keys:
