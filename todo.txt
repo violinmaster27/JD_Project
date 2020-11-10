@@ -12,6 +12,8 @@ it describes the knife in the drawer. Could add some conditions or just edit des
 - if user has already chosen an action, we can remove it from the list. that way it doesn't show up again
 unless they need to retrieve an object, then it can keep showing up until they get what they need to have
 
+- if user is already in the room, the room location notice doesn't keep repeating
+
 
 
 
