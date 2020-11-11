@@ -6,14 +6,15 @@ current_room = 'front_door'
 rooms_completed = []
 is_hidden = False
 has_keys = False
+has_escape_keys = False
 has_knife = False
 
 # Any time actions
 def prompt_action():
     USER_CHOICE = """
-    Change rooms, look around, or give up. What do you do?
+    Change rooms, look around the room, or give up. What do you do?
         - '1' to change rooms
-        - '2' to look around
+        - '2' to look around the room
         - 'q' to give up (quit the game)
 
     Enter your choice here: """
@@ -47,6 +48,7 @@ def look_around(room_index):
         except ValueError:
             print('Please enter an integer value.')
     time.sleep(1)
+    # need to move this somewhere so it doesn't repeat even if action completed
     print(room.action_results[USER_CHOICE - 1])
 
     time.sleep(1)
@@ -55,9 +57,11 @@ def look_around(room_index):
     # If player picks certain action, activate its associated method and prompt the user again
     global has_keys
     global has_knife
+    global has_escape_keys
 
     if room.name == 'front_door':
-        room.specialInteraction()
+        if USER_CHOICE == 1:
+            room.escape_the_house(has_escape_keys)
 
     if room.name == 'dining_room':
         room.specialInteraction()
@@ -97,13 +101,21 @@ def look_around(room_index):
                 time.sleep(2)
                 # player enters into library
                 library()
+        if USER_CHOICE == 2:
+            room.open_book()
 
     if room.name == 'library':
         if USER_CHOICE == 2:
             room.hide_in_shadows()
 
     if room.name == 'study':
-        room.special_interaction()
+        if USER_CHOICE == 1:
+            room.read_letter()
+        if USER_CHOICE == 2:
+            if has_escape_keys == False:
+                result = room.take_keys()
+                if result:
+                    has_escape_keys = True
 
     # call room function again to continue, obviously this shouldnt happen if the player is hidden but we'll deal with that soon
 
@@ -365,12 +377,12 @@ def library():
                 change_room('bedroom')
                 break
             elif room_input == 'NVM':
-                bedroom()
+                library()
             else:
                 print("Not a valid option. Choose again.")
                 continue
         elif user_input == '2':
-            look_around(5)
+            look_around(6)
             break
         elif user_input == 'q':
             end_game()
@@ -401,12 +413,12 @@ def study():
                 change_room('front_door')
                 break
             elif room_input == 'NVM':
-                bedroom()
+                study()
             else:
                 print("Not a valid option. Choose again.")
                 continue
         elif user_input == '2':
-            look_around(5)
+            look_around(7)
             break
         elif user_input == 'q':
             end_game()

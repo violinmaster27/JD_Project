@@ -18,10 +18,23 @@ class FrontDoor:
     name = 'front_door'
     description = 'The front door is a massive plank of dark oak, with a large golden handle.'
     actions = ['Try the front door.', 'Look up the stairs.', 'Hide inside the coat closet']
-    action_results = ['The door is locked shut. It will not budge.', "Darkness...you hear faint footsteps on one of the upper floors. You're not alone.", 'You are hidden. You also find a spare tuxedo hanging in the closet, obviously the person who lived here liked to play football.']
+    action_results = ['The door is locked shut.', "Darkness...you hear faint footsteps on one of the upper floors. You're not alone.", 'You are hidden. You also find a spare tuxedo hanging in the closet, obviously the person who lived here liked to play football.']
 
-    def specialInteraction(self):
-        return 'If there is a special interaction it goes here.'
+    # only way to win the game so far, could be other ways if we want
+    def escape_the_house(self, has_escape_keys):
+        answer = input("Do you try to escape through the front door? (y/n)").upper()
+
+        if answer == "Y":
+            if has_escape_keys:
+                print("You open the front door and escape this creepy house. YOU WIN!!")
+                quit()
+            else:
+                print("You need the correct key to open this door. Go search the house, you may get lucky.")
+        elif answer == "N":
+            print("Well, at least you didn't waste your time.")
+        else:
+            print("Not a valid response. Try again.")
+            self.escape_the_house(has_escape_keys)
 
 
 class DiningRoom:
@@ -156,7 +169,7 @@ class Library:
                  armchair sits next to a fireplace with a fancy globe in the corner.
                  """
     actions = ['Inspect the large globe', 'Browse through the books', 'Inspect the fireplace']
-    action_results = ['The globe opens up and reveals some photographs', 'Whoever lives here has good taste, now that I mention it, what happened to the steps I heard from up here? Maybe I should hide somwhere...', "This fireplace looks recently extinguished, I've really got to find a way out of this house..."]
+    action_results = ['The globe opens up and inside are a bunch of pictures of violas.', 'Whoever lives here has good taste, now that I mention it, what happened to the steps I heard from up here? Maybe I should hide somwhere...', "This fireplace looks recently extinguished, I've really got to find a way out of this house..."]
 
     def hide_in_shadows(self):
         user_input = input("Do you hide in the shadows? (y/n)").upper()
@@ -180,11 +193,33 @@ class Study:
                  """
 
     actions = ['Open the envelope', 'Look through the desk drawer', 'Hide under the desk']
-    action_results = ['result 1', 'You find a another set of keys, maybe these will help you escape?', 'The house is quiet, but something tells you your not alone.']
+    action_results = ["Inside is a letter.", 'You find a another set of keys, maybe these will help you escape?', 'The house is quiet, but something tells you your not alone.']
 
-    def special_interaction(self):
-        return 'anything that goes here'
+    def read_letter(self):
+        answer = input("Do you read the letter? (y/n)").upper()
 
+        if answer == "Y":
+            print("""
+                Here is a clue for the user to figure out...
+                Maybe tell them to look for an item somewhere in the room?
+            """)
+        elif answer == "N":
+            print("You don't need help, you've got all you need inside your head.")
+        else:
+            print("Not a valid answer, try again.")
+            self.read_letter()
+
+    def take_keys(self):
+        answer = input("Do you take the keys? (y/n)").upper()
+
+        if answer == "Y":
+            return True 
+        elif answer == "N":
+            print("You sure like to take risks, don't you??")
+            return False 
+        else:
+            print("Not a valid answer. Try again.")
+            self.take_keys()
 
 front_door = FrontDoor()
 dining_room = DiningRoom()
