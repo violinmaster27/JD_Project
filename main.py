@@ -22,17 +22,17 @@ def prompt_action():
 
 # need to break after calling change_room() or look_around() inside and loops or stuff will break, no pun intended
 def change_room(room_name):
-    time.sleep(1)
+    #time.sleep(1)
     eval(room_name + '()')
 
 def look_around(room_index):
     room = all_rooms[room_index]
 
-    time.sleep(1)
+    #time.sleep(1)
 
     print(room.description)
 
-    time.sleep(1)
+    #time.sleep(1)
 
     action_options = ""
     for index, action in enumerate(room.actions):
@@ -51,12 +51,12 @@ def look_around(room_index):
             break
         except ValueError:
             print('Please enter an integer value.')
-    time.sleep(1)
+    #time.sleep(1)
     # need to move this somewhere so it doesn't repeat even if action completed
     print(room.action_results[USER_CHOICE - 1])
     room.action_completed[USER_CHOICE - 1] = True
 
-    time.sleep(1)
+    #time.sleep(1)
 
     # Here something happens, either nothing and it calls change_room again, or the player stays hidden, OR a specific special room method is called
     # If player picks certain action, activate its associated method and prompt the user again
@@ -118,7 +118,7 @@ def look_around(room_index):
             room.action_completed[0] = False
             result = room.go_up_passage(has_keys)
             if result:
-                time.sleep(2)
+                #time.sleep(2)
                 # player enters into library
                 library()
         if USER_CHOICE == 2:
@@ -157,7 +157,7 @@ def front_door():
     current_room = "front_door"
 
     print("You are at the front door. The stairway is blocked by debris.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -192,7 +192,7 @@ def dining_room():
     current_room = "dining_room"
 
     print("You are in the dining room.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -231,7 +231,7 @@ def living_room():
     current_room = "living_room"
 
     print("You are in the living room.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -270,7 +270,7 @@ def kitchen():
     current_room = "kitchen"
 
     print("You are in the kitchen.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -309,7 +309,7 @@ def bathroom():
     current_room = "bathroom"
 
     print("You are in the bathroom.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -345,7 +345,7 @@ def bedroom():
     current_room = "bedroom"
 
     print("You are in the bedroom.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -384,7 +384,7 @@ def library():
     current_room = "library"
 
     print("You are in the library.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -420,7 +420,7 @@ def study():
     current_room = "study"
 
     print("You are in the study.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
