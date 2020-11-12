@@ -5,9 +5,6 @@
 - Decide what special interactions to add to other rooms, if any, and add them
 Maybe more noise makers or items to take
 
-- if user has already chosen an action, we can remove it from the list. that way it doesn't show up again
-unless they need to retrieve an object, then it can keep showing up until they get what they need to have
-
 - if user is already in the room, the room location notice doesn't keep repeating, as well as the same description
 
 
