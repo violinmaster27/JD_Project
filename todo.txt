@@ -5,10 +5,6 @@
 - Decide what special interactions to add to other rooms, if any, and add them
 Maybe more noise makers or items to take
 
-- Address the weird issue where when the player picks an action, it gives a static description
-even when the player has already completed that action ex. Player already has the knife but when they open drawer again
-it describes the knife in the drawer. Could add some conditions or just edit descriptions to make sense.
-
 - if user has already chosen an action, we can remove it from the list. that way it doesn't show up again
 unless they need to retrieve an object, then it can keep showing up until they get what they need to have
 

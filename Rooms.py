@@ -19,6 +19,7 @@ class FrontDoor:
     description = 'The front door is a massive plank of dark oak, with a large golden handle.'
     actions = ['Try the front door.', 'Look up the stairs.', 'Hide inside the coat closet']
     action_results = ['The door is locked shut.', "Darkness...you hear faint footsteps on one of the upper floors. You're not alone.", 'You are hidden. You also find a spare tuxedo hanging in the closet, obviously the person who lived here liked to play football.']
+    action_completed = [False, False, False]
 
     # only way to win the game so far, could be other ways if we want
     def escape_the_house(self, has_escape_keys):
@@ -30,8 +31,10 @@ class FrontDoor:
                 quit()
             else:
                 print("You need the correct key to open this door. Go search the house, you may get lucky.")
+                return False
         elif answer == "N":
             print("Well, at least you didn't waste your time.")
+            return False
         else:
             print("Not a valid response. Try again.")
             self.escape_the_house(has_escape_keys)
@@ -48,6 +51,7 @@ class DiningRoom:
                 """
     actions = ['Sit at the table.', 'Hide under the table.', 'Inspect the chandelier.']
     action_results = ['The seat is warm. Suddenly you feel that someone is watching you.', f"The table cloth conseales you... You see a number carved into the underside of the table. '{safe_number}'", 'Whoever lives here needs to dust more often.']
+    action_completed = [False, False, False]
 
     def specialInteraction(self):
         return 'If there is a special interaction it goes here.'
@@ -65,6 +69,7 @@ class LivingRoom:
 
     actions = ['Lift the painting', 'Sit on the lounge sofa', 'Inspect the painting']
     action_results = ['You lift the painting to find some sort of safe behind it. If only you had the combination...', 'Creeek! Sitting on the sofa causes a loud noise.', 'You see initials on the bottom left of the painting: A.A. Probably the persons initials?']
+    action_completed = [False, False, False]
 
     def open_safe(self):
         user_choice = input("Do you attempt to open the safe? (y/n) ").upper()
@@ -100,6 +105,7 @@ class Kitchen:
 
     actions = ['Check inside the fridge.', 'Look inside the cabinet.', 'Open the drawer next to the sink.']
     action_results = ['A putrid stench emits from the fridge, and you notice a cloudy jar on the top shelf.', 'Nothing special in here.', 'You find a sheathed knife lying in the drawer. It has some Asain writing on it.']
+    action_completed = [False, False, False]
 
     @staticmethod
     def inspect_jar():
@@ -127,6 +133,7 @@ class Bathroom:
     description = 'The bathroom is small. Not a pleasant smell at all, and the light flickers for a while before fully turning on.'
     actions = ['Flush the toilet.', 'Open the medicine cabinet.', 'Pull back the shower curtain.']
     action_results = ['It seems broken...I guess the smell is staying.', 'A lot of painkillers...and fungicide, fungus???', 'It is as you feared, a small pool of blood remains in the tub.']
+    action_completed = [False, False, False]
 
     def specialInteraction(self):
         return 'If there is a special interaction it goes here.'
@@ -137,6 +144,7 @@ class Bedroom:
     description = 'A very simple looking bedroom. Signs of use appear throughout the room. But where is the resident?'
     actions = ['Look in the Closet', 'Search the Nightstand', 'Look in the mirror']
     action_results = ["It's not a closet at all, but a secret passageway leading up somewhere...", 'Fitting, you find a copy of The Shining.', 'You see a figure pass by the door behind you...is it too late to leave?']
+    action_completed = [False, False, False]
 
     def go_up_passage(self, has_keys):
         print("You go up the secret passageway. At the end is a door...but it's locked. You need a key to enter.")
@@ -146,7 +154,7 @@ class Bedroom:
             if has_keys:
                 # just had to add it here for dramatic effect
                 time.sleep(2)
-                print("You take a second to find the right key but once you do the door clicks open. You enter into the unknown.")
+                print("You take a second to find the right key but once you do the door clicks open...and you step through the threshold...")
                 return True
                 # this will lead into the second floor of rooms
             else:
@@ -170,12 +178,14 @@ class Library:
                  """
     actions = ['Inspect the large globe', 'Browse through the books', 'Inspect the fireplace']
     action_results = ['The globe opens up and inside are a bunch of pictures of violas.', 'Whoever lives here has good taste, now that I mention it, what happened to the steps I heard from up here? Maybe I should hide somwhere...', "This fireplace looks recently extinguished, I've really got to find a way out of this house..."]
+    action_completed = [False, False, False]
 
     def hide_in_shadows(self):
         user_input = input("Do you hide in the shadows? (y/n)").upper()
 
         if user_input == "Y":
             print("You are hidden. You accidently knock down a book from the shelf...a thud breaks the silence.")
+            return True
         elif user_input == "N":
             print("Feeling lucky today are we? Well, beware of danger.")
         else:
@@ -194,6 +204,7 @@ class Study:
 
     actions = ['Open the envelope', 'Look through the desk drawer', 'Hide under the desk']
     action_results = ["Inside is a letter.", 'You find a another set of keys, maybe these will help you escape?', 'The house is quiet, but something tells you your not alone.']
+    action_completed = [False, False, False]
 
     def read_letter(self):
         answer = input("Do you read the letter? (y/n)").upper()
