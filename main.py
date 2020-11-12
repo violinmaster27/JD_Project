@@ -22,23 +22,27 @@ def prompt_action():
 
 # need to break after calling change_room() or look_around() inside and loops or stuff will break, no pun intended
 def change_room(room_name):
-    time.sleep(1)
+    #time.sleep(1)
     eval(room_name + '()')
 
 def look_around(room_index):
     room = all_rooms[room_index]
 
-    time.sleep(1)
+    #time.sleep(1)
 
     print(room.description)
 
-    time.sleep(1)
+    #time.sleep(1)
 
     action_options = ""
     for index, action in enumerate(room.actions):
-        action_options = action_options + f'- {index + 1} to...' + action + '\n'
+        if room.action_completed[index] == False:
+            action_options = action_options + f'- {index + 1} to...' + action + '\n'
 
-    action_options = action_options + 'Enter your choice here: '
+    if action_options != "":
+        action_options = action_options + 'Enter your choice here: '
+    else:
+        change_room(current_room)
 
     # Type check user input
     while True:
@@ -47,24 +51,34 @@ def look_around(room_index):
             break
         except ValueError:
             print('Please enter an integer value.')
-    time.sleep(1)
+    #time.sleep(1)
     # need to move this somewhere so it doesn't repeat even if action completed
     print(room.action_results[USER_CHOICE - 1])
+    room.action_completed[USER_CHOICE - 1] = True
 
-    time.sleep(1)
+    #time.sleep(1)
 
     # Here something happens, either nothing and it calls change_room again, or the player stays hidden, OR a specific special room method is called
     # If player picks certain action, activate its associated method and prompt the user again
+    global is_hidden
     global has_keys
     global has_knife
     global has_escape_keys
 
     if room.name == 'front_door':
         if USER_CHOICE == 1:
-            room.escape_the_house(has_escape_keys)
+            result = room.escape_the_house(has_escape_keys)
+            if result == False:
+                # let user choose this action again
+                room.action_completed[0] = False
+        if USER_CHOICE == 3:
+            # let user choose closet hide action again
+            room.action_completed[2] = False
 
     if room.name == 'dining_room':
-        room.specialInteraction()
+        if has_keys == False:
+            # let user choose hide under table action again
+            room.action_completed[1] = False
 
     if room.name == 'living_room':
         # player inspects safe
@@ -73,6 +87,10 @@ def look_around(room_index):
                 result = room.open_safe()
                 if result:
                     has_keys = True
+                else:
+                    # let player lift painting again since they don't have the key
+                    room.action_completed[0] = False
+            # keeping this else for lols. it's an easter egg
             else:
                 print("I already opened this safe. Guess I'll take these pure diamonds too hehe yeaa boiiiiii.")
 
@@ -86,9 +104,9 @@ def look_around(room_index):
                 result = room.take_knife()
                 if result:
                     has_knife = True
-            else:
-                # this is kinda weird bc the action result describes you finding the knife in the drawer, even if you have it. could redo some logic or redo the wording somehow. small problem tho.
-                print("Oh wait, you're already holding this knife.")
+                else:
+                    # let user choose this action again
+                    room.action_completed[2] = False
 
     if room.name == 'bathroom':
         room.specialInteraction()
@@ -96,9 +114,11 @@ def look_around(room_index):
     if room.name == 'bedroom':
         # player interacts with secret passageway
         if USER_CHOICE == 1:
+            # always allow access to closet
+            room.action_completed[0] = False
             result = room.go_up_passage(has_keys)
             if result:
-                time.sleep(2)
+                #time.sleep(2)
                 # player enters into library
                 library()
         if USER_CHOICE == 2:
@@ -106,7 +126,11 @@ def look_around(room_index):
 
     if room.name == 'library':
         if USER_CHOICE == 2:
-            room.hide_in_shadows()
+            # let user choose this action again
+            room.action_completed[1] = False
+            result = room.hide_in_shadows()
+            if result:
+                is_hidden = True
 
     if room.name == 'study':
         if USER_CHOICE == 1:
@@ -133,7 +157,7 @@ def front_door():
     current_room = "front_door"
 
     print("You are at the front door. The stairway is blocked by debris.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -168,7 +192,7 @@ def dining_room():
     current_room = "dining_room"
 
     print("You are in the dining room.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -207,7 +231,7 @@ def living_room():
     current_room = "living_room"
 
     print("You are in the living room.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -246,7 +270,7 @@ def kitchen():
     current_room = "kitchen"
 
     print("You are in the kitchen.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -285,7 +309,7 @@ def bathroom():
     current_room = "bathroom"
 
     print("You are in the bathroom.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -321,7 +345,7 @@ def bedroom():
     current_room = "bedroom"
 
     print("You are in the bedroom.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -360,7 +384,7 @@ def library():
     current_room = "library"
 
     print("You are in the library.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
@@ -396,7 +420,7 @@ def study():
     current_room = "study"
 
     print("You are in the study.")
-    time.sleep(2)
+    #time.sleep(2)
 
     user_input = input(prompt_action())
 
