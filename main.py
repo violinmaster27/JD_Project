@@ -6,8 +6,13 @@ current_room = 'front_door'
 rooms_completed = []
 is_hidden = False
 has_keys = False
+# will turn to true in the Study if user takes keys from there
 has_escape_keys = False
 has_knife = False
+# this checks if user is already in a room, will limit the room location notice 
+in_room = False
+# this variable limits the room descriptions, will describe room only one time, unless user re-enters the room.
+room_described = False 
 
 # Any time actions
 def prompt_action():
@@ -26,11 +31,16 @@ def change_room(room_name):
     eval(room_name + '()')
 
 def look_around(room_index):
+    global room_described
+
     room = all_rooms[room_index]
 
     #time.sleep(1)
 
-    print(room.description)
+    # will only print room description if user just entered the room
+    if room_described == False:
+        print(room.description)
+        room_described = True 
 
     #time.sleep(1)
 
@@ -52,7 +62,6 @@ def look_around(room_index):
         except ValueError:
             print('Please enter an integer value.')
     #time.sleep(1)
-    # need to move this somewhere so it doesn't repeat even if action completed
     print(room.action_results[USER_CHOICE - 1])
     room.action_completed[USER_CHOICE - 1] = True
 
@@ -87,6 +96,7 @@ def look_around(room_index):
                 result = room.open_safe()
                 if result:
                     has_keys = True
+                    room.action_completed[0] = True 
                 else:
                     # let player lift painting again since they don't have the key
                     room.action_completed[0] = False
@@ -154,10 +164,15 @@ def end_game():
 
 def front_door():
     global current_room
+    global in_room
+    global room_described
     current_room = "front_door"
 
-    print("You are at the front door. The stairway is blocked by debris.")
-    #time.sleep(2)
+    # will only print room location if user just entered the room, same goes with all the other rooms
+    if in_room == False:
+        print("You are at the front door. The stairway is blocked by debris.")
+        #time.sleep(2)
+        in_room = True 
 
     user_input = input(prompt_action())
 
@@ -168,9 +183,13 @@ def front_door():
                 I changed my mind. (nvm)
                 """).upper()
             if room_input == 'L':
+                in_room = False 
+                room_described = False 
                 change_room('living_room')
                 break
             elif room_input == 'D':
+                in_room = False
+                room_described = False 
                 change_room('dining_room')
                 break
             elif room_input == 'NVM':
@@ -189,10 +208,14 @@ def front_door():
 
 def dining_room():
     global current_room
+    global in_room 
+    global room_described
     current_room = "dining_room"
 
-    print("You are in the dining room.")
-    #time.sleep(2)
+    if in_room == False:
+        print("You are in the dining room.")
+        #time.sleep(2)
+        in_room = True 
 
     user_input = input(prompt_action())
 
@@ -203,12 +226,18 @@ def dining_room():
                 I changed my mind. (nvm)
                 """).upper()
             if room_input == 'K':
+                in_room = False
+                room_described = False 
                 change_room('kitchen')
                 break
             elif room_input == 'BR':
+                in_room = False 
+                room_described = False 
                 change_room('bedroom')
                 break
             elif room_input == 'F':
+                in_room = False 
+                room_described = False 
                 change_room('front_door')
                 break
             elif room_input == 'NVM':
@@ -228,10 +257,14 @@ def dining_room():
 
 def living_room():
     global current_room
+    global in_room
+    global room_described
     current_room = "living_room"
 
-    print("You are in the living room.")
-    #time.sleep(2)
+    if in_room == False:
+        print("You are in the living room.")
+        #time.sleep(2)
+        in_room = True
 
     user_input = input(prompt_action())
 
@@ -242,12 +275,18 @@ def living_room():
                 I changed my mind. (nvm)
                 """).upper()
             if room_input == 'K':
+                in_room = False
+                room_described = False 
                 change_room('kitchen')
                 break
             elif room_input == 'BTH':
+                in_room = False
+                room_described = False 
                 change_room('bathroom')
                 break
             elif room_input == 'F':
+                in_room = False
+                room_described = False 
                 change_room('front_door')
                 break
             elif room_input == 'NVM':
@@ -267,10 +306,14 @@ def living_room():
 
 def kitchen():
     global current_room
+    global in_room 
+    global room_described
     current_room = "kitchen"
 
-    print("You are in the kitchen.")
-    #time.sleep(2)
+    if in_room == False:
+        print("You are in the kitchen.")
+        #time.sleep(2)
+        in_room = True 
 
     user_input = input(prompt_action())
 
@@ -281,12 +324,18 @@ def kitchen():
                 I changed my mind. (nvm)
                 """).upper()
             if room_input == 'D':
+                in_room = False
+                room_described = False 
                 change_room('dining_room')
                 break
             elif room_input == 'L':
+                in_room = False
+                room_described = False 
                 change_room('living_room')
                 break
             elif room_input == 'BR':
+                in_room = False
+                room_described = False 
                 change_room('bedroom')
                 break
             elif room_input == 'NVM':
@@ -306,10 +355,14 @@ def kitchen():
 
 def bathroom():
     global current_room
+    global in_room 
+    global room_described
     current_room = "bathroom"
 
-    print("You are in the bathroom.")
-    #time.sleep(2)
+    if in_room == False:
+        print("You are in the bathroom.")
+        #time.sleep(2)
+        in_room = True 
 
     user_input = input(prompt_action())
 
@@ -320,9 +373,13 @@ def bathroom():
                 I changed my mind. (nvm)
                 """).upper()
             if room_input == 'L':
+                in_room = False
+                room_described = False 
                 change_room('living_room')
                 break
             elif room_input == 'BR':
+                in_room = False
+                room_described = False 
                 change_room('bedroom')
                 break
             elif room_input == 'NVM':
@@ -342,10 +399,14 @@ def bathroom():
 
 def bedroom():
     global current_room
+    global in_room 
+    global room_described
     current_room = "bedroom"
 
-    print("You are in the bedroom.")
-    #time.sleep(2)
+    if in_room == False:
+        print("You are in the bedroom.")
+        #time.sleep(2)
+        in_room = True 
 
     user_input = input(prompt_action())
 
@@ -356,12 +417,18 @@ def bedroom():
                 I changed my mind. (nvm)
                 """).upper()
             if room_input == 'D':
+                in_room = False
+                room_described = False 
                 change_room('dining_room')
                 break
             elif room_input == 'K':
+                in_room = False
+                room_described = False 
                 change_room('kitchen')
                 break
             elif room_input == 'BTH':
+                in_room = False
+                room_described = False 
                 change_room('bathroom')
                 break
             elif room_input == 'NVM':
@@ -381,10 +448,14 @@ def bedroom():
 
 def library():
     global current_room
+    global in_room 
+    global room_described
     current_room = "library"
 
-    print("You are in the library.")
-    #time.sleep(2)
+    if in_room == False:
+        print("You are in the library.")
+        #time.sleep(2)
+        in_room = True 
 
     user_input = input(prompt_action())
 
@@ -395,9 +466,13 @@ def library():
                 I changed my mind. (nvm)
                 """).upper()
             if room_input == 'S':
+                in_room = False
+                room_described = False 
                 change_room('study')
                 break
             elif room_input == 'BR':
+                in_room = False
+                room_described = False 
                 change_room('bedroom')
                 break
             elif room_input == 'NVM':
@@ -417,10 +492,14 @@ def library():
 
 def study():
     global current_room
+    global in_room 
+    global room_described
     current_room = "study"
 
-    print("You are in the study.")
-    #time.sleep(2)
+    if in_room == False:
+        print("You are in the study.")
+        #time.sleep(2)
+        in_room = True 
 
     user_input = input(prompt_action())
 
@@ -431,9 +510,13 @@ def study():
                 I changed my mind. (nvm)
                 """).upper()
             if room_input == 'L':
+                in_room = False
+                room_described = False 
                 change_room('library')
                 break
             elif room_input == 'F':
+                in_room = False
+                room_described = False 
                 change_room('front_door')
                 break
             elif room_input == 'NVM':
