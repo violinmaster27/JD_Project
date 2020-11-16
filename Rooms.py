@@ -140,6 +140,7 @@ class Bathroom:
 
 
 class Bedroom:
+    global in_room
     name = 'bedroom'
     description = 'A very simple looking bedroom. Signs of use appear throughout the room. But where is the resident?'
     actions = ['Look in the Closet', 'Search the Nightstand', 'Look in the mirror']
@@ -152,6 +153,7 @@ class Bedroom:
 
         if user_choice == 'Y':
             if has_keys:
+                in_room = False 
                 # just had to add it here for dramatic effect
                 time.sleep(2)
                 print("You take a second to find the right key but once you do the door clicks open...and you step through the threshold...")

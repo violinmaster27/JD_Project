@@ -5,9 +5,6 @@
 - Decide what special interactions to add to other rooms, if any, and add them
 Maybe more noise makers or items to take
 
-- if user is already in the room, the room location notice doesn't keep repeating, as well as the same description
-
-
 
 
 
