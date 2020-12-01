@@ -199,13 +199,13 @@ class Study:
     name = 'study'
     description = """
                  The study is quite small but messy. There is a main desk and
-                 there are lot's of loose papers lying around as well as an
+                 there are lots of loose papers lying around as well as an
                  important looking envelope. This room
                  should provide some useful information.
                  """
 
     actions = ['Open the envelope', 'Look through the desk drawer', 'Hide under the desk']
-    action_results = ["Inside is a letter.", 'You find a another set of keys, maybe these will help you escape?', 'The house is quiet, but something tells you your not alone.']
+    action_results = ["Inside is a letter.", 'You find a another set of keys, maybe these will help you escape?', 'You scramble under the desk, holding your breath. You could have sworn you heard footsteps in the library.']
     action_completed = [False, False, False]
 
     def read_letter(self):
@@ -213,9 +213,14 @@ class Study:
 
         if answer == "Y":
             print("""
-                Here is a clue for the user to figure out...
-                Maybe tell them to look for an item somewhere in the room?
+                If you're reading this...I don't have much time. I'm hiding in the bathtub right now and that...thing, I hear it walking around the kitchen. It's looking for me.
+                Great Scott, forgive me!! I didn't mean for this to happen! I just wanted to prank the kid, get a good laugh. My friends told me this house was abandoned!
+                Whatever that thing is, it just slipped from the shadows and took him...and the screams...I didn't know a child could make those noises.
+                I barely had enough time to make a dash for the bathroom. But it knows I'm here. It's only a matter of time before it finds me...and does to me what it did to that kid!
+                If you find this note, please, just tell the Constanzas I'm sorry. I never wanted this to happen. I'm sorry Georgie. You were a good kid and now you're dead.
+                Oh God. I think it found me. Mom dad I'm so sorry please no I don't wan-
             """)
+            print("It's time to go.")
         elif answer == "N":
             print("You don't need help, you've got all you need inside your head.")
         else:

@@ -30,6 +30,25 @@ def change_room(room_name):
     #time.sleep(1)
     eval(room_name + '()')
 
+def hide():
+    global is_hidden
+    is_hidden = True
+
+    leave_cover= input("Do you come out of hiding? (y/n)").upper()
+
+    if leave_cover == "Y":
+        is_hidden = False
+        print("You leave the safety over your hiding place. :(((")
+        return
+    elif leave_cover == "N":
+        print("You hide a bit longer...")
+        #time.sleep(3)
+        hide()
+    else:
+        print("Not a valid answer. Try again.")
+        hide()
+
+
 def look_around(room_index):
     global room_described
 
@@ -82,9 +101,12 @@ def look_around(room_index):
                 room.action_completed[0] = False
         if USER_CHOICE == 3:
             # let user choose closet hide action again
+            hide()
             room.action_completed[2] = False
 
     if room.name == 'dining_room':
+        if USER_CHOICE == 2:
+            hide()
         if has_keys == False:
             # let user choose hide under table action again
             room.action_completed[1] = False
@@ -118,9 +140,6 @@ def look_around(room_index):
                     # let user choose this action again
                     room.action_completed[2] = False
 
-    if room.name == 'bathroom':
-        room.specialInteraction()
-
     if room.name == 'bedroom':
         # player interacts with secret passageway
         if USER_CHOICE == 1:
@@ -150,8 +169,9 @@ def look_around(room_index):
                 result = room.take_keys()
                 if result:
                     has_escape_keys = True
+        if USER_CHOICE == 3:
+            hide()
 
-    # call room function again to continue, obviously this shouldnt happen if the player is hidden but we'll deal with that soon
 
     change_room(current_room)
 
@@ -506,20 +526,15 @@ def study():
     while True:
         if user_input == '1':
             room_input = input("""
-                Will you enter the library, or try to escape through the front door? (L/F):
+                Will you enter the library? (y/n):
                 I changed my mind. (nvm)
                 """).upper()
-            if room_input == 'L':
+            if room_input == 'Y':
                 in_room = False
                 room_described = False 
                 change_room('library')
                 break
-            elif room_input == 'F':
-                in_room = False
-                room_described = False 
-                change_room('front_door')
-                break
-            elif room_input == 'NVM':
+            elif room_input == 'NVM' or room_input == 'N':
                 study()
             else:
                 print("Not a valid option. Choose again.")

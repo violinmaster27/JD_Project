@@ -1,9 +1,6 @@
 ********** PRIMARY TODOS **********
 
-- Get the is_hidden mechanic to work, need to set conditions inside look_around function
-
-- Decide what special interactions to add to other rooms, if any, and add them
-Maybe more noise makers or items to take
+- Get this program to run as a standalone so that other people can play it
 
 
 
