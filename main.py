@@ -27,7 +27,7 @@ def prompt_action():
 
 # need to break after calling change_room() or look_around() inside and loops or stuff will break, no pun intended
 def change_room(room_name):
-    #time.sleep(1)
+    time.sleep(1)
     eval(room_name + '()')
 
 def hide():
@@ -42,7 +42,7 @@ def hide():
         return
     elif leave_cover == "N":
         print("You hide a bit longer...")
-        #time.sleep(3)
+        time.sleep(3)
         hide()
     else:
         print("Not a valid answer. Try again.")
@@ -54,14 +54,14 @@ def look_around(room_index):
 
     room = all_rooms[room_index]
 
-    #time.sleep(1)
+    time.sleep(1)
 
     # will only print room description if user just entered the room
     if room_described == False:
         print(room.description)
         room_described = True 
 
-    #time.sleep(1)
+    time.sleep(1)
 
     action_options = ""
     for index, action in enumerate(room.actions):
@@ -80,11 +80,11 @@ def look_around(room_index):
             break
         except ValueError:
             print('Please enter an integer value.')
-    #time.sleep(1)
+    time.sleep(1)
     print(room.action_results[USER_CHOICE - 1])
     room.action_completed[USER_CHOICE - 1] = True
 
-    #time.sleep(1)
+    time.sleep(1)
 
     # Here something happens, either nothing and it calls change_room again, or the player stays hidden, OR a specific special room method is called
     # If player picks certain action, activate its associated method and prompt the user again
@@ -147,7 +147,7 @@ def look_around(room_index):
             room.action_completed[0] = False
             result = room.go_up_passage(has_keys)
             if result:
-                #time.sleep(2)
+                time.sleep(2)
                 # player enters into library
                 library()
         if USER_CHOICE == 2:
@@ -191,7 +191,7 @@ def front_door():
     # will only print room location if user just entered the room, same goes with all the other rooms
     if in_room == False:
         print("You are at the front door. The stairway is blocked by debris.")
-        #time.sleep(2)
+        time.sleep(2)
         in_room = True 
 
     user_input = input(prompt_action())
@@ -234,7 +234,7 @@ def dining_room():
 
     if in_room == False:
         print("You are in the dining room.")
-        #time.sleep(2)
+        time.sleep(2)
         in_room = True 
 
     user_input = input(prompt_action())
@@ -283,7 +283,7 @@ def living_room():
 
     if in_room == False:
         print("You are in the living room.")
-        #time.sleep(2)
+        time.sleep(2)
         in_room = True
 
     user_input = input(prompt_action())
@@ -332,7 +332,7 @@ def kitchen():
 
     if in_room == False:
         print("You are in the kitchen.")
-        #time.sleep(2)
+        time.sleep(2)
         in_room = True 
 
     user_input = input(prompt_action())
@@ -381,7 +381,7 @@ def bathroom():
 
     if in_room == False:
         print("You are in the bathroom.")
-        #time.sleep(2)
+        time.sleep(2)
         in_room = True 
 
     user_input = input(prompt_action())
@@ -425,7 +425,7 @@ def bedroom():
 
     if in_room == False:
         print("You are in the bedroom.")
-        #time.sleep(2)
+        time.sleep(2)
         in_room = True 
 
     user_input = input(prompt_action())
@@ -474,7 +474,7 @@ def library():
 
     if in_room == False:
         print("You are in the library.")
-        #time.sleep(2)
+        time.sleep(2)
         in_room = True 
 
     user_input = input(prompt_action())
@@ -518,7 +518,7 @@ def study():
 
     if in_room == False:
         print("You are in the study.")
-        #time.sleep(2)
+        time.sleep(2)
         in_room = True 
 
     user_input = input(prompt_action())
